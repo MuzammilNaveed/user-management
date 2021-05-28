@@ -50,6 +50,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/get_courses', [CourseController::class, 'view']);
     Route::post('/update_course', [CourseController::class, 'update']);
 
+
+    // lectures
+    Route::get('/lectures', [CourseController::class, 'lectures'])->name('lecture.index');
+    Route::post('/save_lecture', [CourseController::class, 'saveLecture']);
+    Route::get('/get_lecture', [CourseController::class, 'viewLecture']);
+    Route::post('/update_lecture', [CourseController::class, 'updateLecture']);
+
  
 });
 

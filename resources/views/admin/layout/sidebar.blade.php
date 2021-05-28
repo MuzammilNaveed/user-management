@@ -2,7 +2,8 @@
 
 $menus = Session('menus');
 
-$active_sub_menu = Request::segment(1) == "courses" ? "open active" : "-";
+$active_sub_menu = Request::segment(1) == "courses" || 
+  Request::segment(1) == "lectures" ? "open active" : "-";
 
 ?>
 

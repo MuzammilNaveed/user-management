@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Courses;
+use App\Models\Lectures;
 
 class CourseController extends Controller
 {
@@ -90,4 +91,60 @@ class CourseController extends Controller
             'success' => true
         ]);
     }
+
+
+
+
+
+    // lectures
+
+
+    public function lectures() {
+        $courses = Courses::all();
+        return view('admin.courses.lectures.lecture',compact('courses'));
+    }
+
+    public function saveLecture(Request $request) {
+        $lecture = new Lectures();
+        $lecture->title =  $request->title;
+        $lecture->video_url = $request->video_url;
+        $lecture->course_id = $request->course_id;
+        $lecture->description = $request->description;
+        $lecture->instructor = $request->instructor;
+
+        $lecture->created_by = Auth::user()->id;
+        $lecture->save();
+
+        return response()->json([
+            'message' => 'Lecture Added Successfully',
+            'status' => 200,
+            'success' => true
+        ]);
+    }
+
+    public function viewLecture() {
+        return Lectures::all();
+    }
+
+
+    public function updateLecture(Request $request) {
+        
+        $lecture = Lectures::find($request->id);
+        $lecture->title =  $request->title;
+        $lecture->video_url = $request->video_url;
+        $lecture->course_id = $request->course_id;
+        $lecture->description = $request->description;
+        $lecture->instructor = $request->instructor;
+
+        $lecture->created_by = Auth::user()->id;
+        $lecture->save();
+
+        return response()->json([
+            'message' => 'Lecture Updated Successfully',
+            'status' => 200,
+            'success' => true
+        ]);
+    }
+
+
 }
