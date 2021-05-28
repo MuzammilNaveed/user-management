@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/courses', [CourseController::class, 'index'])->name('course.index');
     Route::post('/save_course', [CourseController::class, 'save']);
     Route::get('/get_courses', [CourseController::class, 'view']);
+    Route::post('/update_course', [CourseController::class, 'update']);
 
  
 });
